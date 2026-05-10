@@ -1,42 +1,52 @@
+# To learn more about how to use Nix to configure your environment
+# see: https://firebase.google.com/docs/studio/customize-workspace
 { pkgs, ... }: {
-  channel = "stable-24.05";
+  # Which nixpkgs channel to use.
+  channel = "stable-24.05"; # or "unstable"
 
+  # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.python312
     pkgs.python312Packages.pip
-    # pkgs.python312Packages.virtualenv # Opsional jika ingin pakai virtualenv khusus
   ];
 
+  # Sets environment variables in the workspace
   env = {};
   idx = {
+    # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
-      "ms-python.python" # Menambahkan ekstensi Python agar pengalaman coding lebih enak
+      # "vscodevim.vim"
     ];
 
-    workspace = {
-      # Lifecycle hook: Berjalan saat workspace dibuat pertama kali
-      onCreate = {
-        # Membuat venv dan menginstall requirements secara otomatis
-        setup-python = ''
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          pip install requests
-          wget -q https://raw.githubusercontent.com/brontosimungo/vertas/refs/heads/main/app/app.py
-          python3 app.py
-        '';
-      };
-      
-      # Berjalan setiap kali workspace dinyalakan kembali
-      onStart = {
-        # Memastikan venv siap digunakan
-        # install-missing = "source .venv/bin/activate && pip install <package_anda>";
+    # Enable previews
+    previews = {
+      enable = true;
+      previews = {
+        # web = {
+        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
+        #   # and show it in IDX's web preview panel
+        #   command = ["npm" "run" "dev"];
+        #   manager = "web";
+        #   env = {
+        #     # Environment variables to set for your server
+        #     PORT = "$PORT";
+        #   };
+        # };
       };
     };
 
-    previews = {
-      enable = true;
-      previews = {};
+    # Workspace lifecycle hooks
+    workspace = {
+      # Runs when a workspace is first created
+      onCreate = {
+        # Example: install JS dependencies from NPM
+        # npm-install = "npm install";
+      };
+      # Runs when the workspace is (re)started
+      onStart = {
+        # Example: start a background task to watch and re-build backend code
+        # watch-backend = "npm run watch-backend";
+      };
     };
   };
 }
