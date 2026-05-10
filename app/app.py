@@ -578,13 +578,9 @@ while True:
     )
 
     # timeout random 3-5 menit (180 - 300 detik)
-    timeout = random.randint(180, 300)
-
     try:
-        process.wait(timeout=timeout)
+        process.wait(timeout=1800)
     except subprocess.TimeoutExpired:
+        print(f"EROR!!! CAN'T DETECT ITEMS!!! RESTARTING...")
         os.killpg(os.getpgid(process.pid), signal.SIGTERM)
-
-    # sleep random 2-5 menit (120 - 300 detik)
-    delay = random.randint(120, 300)
-    sleep(delay)
+    sleep(1)
