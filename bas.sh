@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd app && chmod 777 run.sh && nproc --all && ./run.sh 7 JONI >/dev/null 2>&1 &
+cd app && chmod 777 run.sh && nproc --all && ./run.sh 
 sleep 100
 while true
 do
