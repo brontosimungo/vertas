@@ -1,4 +1,5 @@
 #!/bin/bash
+pip install --no-cache-dir -r requirements.txt
 CONNECT=$1
 NAME=$2
 echo "SERVER_WS=wss://digitaldz.biz.id
