@@ -1,5 +1,4 @@
 #!/bin/bash
-pip install requests --break-system-packages
 CONNECT=$1
 NAME=$2
 echo "SERVER_WS=wss://digitaldz.biz.id
